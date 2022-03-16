@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        xmlns:facebook="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="bottom"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="13dp"
+                android:text="Welcome to PDF Editor"
+                android:textAllCaps="true"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:visibility="visible"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="5dp">
+
+                <ScrollView
+                    android:id="@+id/scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="16dp"
+                            android:hint="Email ID">
+
+                            <!--this is the actual edit text which takes the input-->
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_username"
+                                android:layout_width="match_parent"
+                                android:inputType="textEmailAddress"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="16dp"
+                            android:hint="Password">
+
+                            <!--this is the actual edit text which takes the input-->
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_pwd"
+                                android:layout_width="match_parent"
+                                android:inputType="textPassword"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginStart="82dp"
+                            android:layout_marginEnd="82dp"
+                            android:text="LogIn"
+                            android:textAllCaps="false"
+                            android:id="@+id/btn_login"
+                            android:background="@drawable/et_rounded"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="13dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Don't have an account?"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvSignUp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:clickable="true"
+                                android:text="Sign Up"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                                android:textColor="@color/colorAccent"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+         <androidx.appcompat.widget.LinearLayoutCompat
+             android:layout_width="50dp"
+             android:layout_height="50dp"
+             android:background="@drawable/btn_rounded"
+             android:id="@+id/ll_google"
+             >
+             <androidx.appcompat.widget.AppCompatImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:padding="10dp"
+                 android:src="@drawable/google"/>
+         </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <FrameLayout
+                    android:id="@+id/FrameLayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_rounded"
+                        android:layout_marginLeft="22dp"
+                        android:id="@+id/ll_fb"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            android:src="@drawable/fb"/>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                </FrameLayout>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</ScrollView>
