@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "805688297854",
+    "project_id": "pdf-editor-19179",
+    "storage_bucket": "pdf-editor-19179.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805688297854:android:b8875a0ee19b576282cb2f",
+        "android_client_info": {
+          "package_name": "com.example.pdfeditormadtpeeps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805688297854-e99l8hjlv01so5nnnjultbmurb3lhljn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pdfeditormadtpeeps",
+            "certificate_hash": "4d4ec8dc830573512a2a21430c3fce1632c9803c"
+          }
+        },
+        {
+          "client_id": "805688297854-7ub7d0t3dqlique5k159er3dgf4gap0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCa5dj4AWmhqhDdtGggFWenRo3f1ZGaM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805688297854-7ub7d0t3dqlique5k159er3dgf4gap0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
