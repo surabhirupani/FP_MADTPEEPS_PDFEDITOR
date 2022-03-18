@@ -106,6 +106,7 @@
                             android:text="LogIn"
                             android:textAllCaps="false"
                             android:id="@+id/btn_login"
+                            android:textColor="@color/colorWhite"
                             android:background="@drawable/et_rounded"/>
 
                         <LinearLayout

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_bg_rounded"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/design_bottom_sheet"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="55dp"
+        android:layout_height="5dp"
+        android:background="@drawable/view_bg"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/iv_type"
+        android:src="@drawable/pdf"/>
+
+    <com.example.pdfeditormadtpeeps.CustomWidgets.BoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abc.PDF"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_name"
+        android:textSize="20sp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10 Aug 2020 | 08:00 PM"
+        android:textColor="#65FFFFFF"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_date"
+        android:textSize="14sp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10 page | 2.5 MB"
+        android:textColor="#65FFFFFF"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_page_size"
+        android:textSize="14sp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:id="@+id/ll_share"
+                android:src="@drawable/group_16888"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="14sp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:id="@+id/ll_rename"
+                android:src="@drawable/group_16887"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rename"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="14sp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:id="@+id/ll_edit"
+                android:src="@drawable/group_16968"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:id="@+id/tv_edit"
+                android:textSize="14sp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:id="@+id/ll_print"
+                android:src="@drawable/group_16884"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Print"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:id="@+id/tv_print"
+                android:textSize="14sp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_gravity="center"
+            android:id="@+id/ll_duplicate"
+            android:src="@drawable/group_16966"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duplicate"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:textSize="14sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_bg"
+            android:layout_gravity="center"
+            android:id="@+id/ll_delete"
+            app:srcCompat="@drawable/ic_baseline_delete_outline_24"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:textSize="14sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>
