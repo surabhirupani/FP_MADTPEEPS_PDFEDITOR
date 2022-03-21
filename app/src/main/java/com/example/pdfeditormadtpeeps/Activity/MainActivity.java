@@ -624,12 +624,12 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                     } else {
                         if (!mFileUtils.isFileExist(input + getString(R.string.pdf_ext))) {
                             new MergePdf(input.toString(), mHomePath, mPasswordProtected,
-                                    mPassword, this, "PDF Hero").execute(pdfpaths);
+                                    mPassword, this, "PDF Editor").execute(pdfpaths);
                         } else {
                             MaterialDialog.Builder builder = DialogUtils.getInstance().createOverwriteDialog(mActivity);
                             builder.onPositive((dialog12, which) -> new MergePdf(input.toString(),
                                     mHomePath, mPasswordProtected, mPassword,
-                                    this, "PDF Hero").execute(pdfpaths))
+                                    this, "PDF Editor").execute(pdfpaths))
                                     .onNegative((dialog1, which) -> mergeFiles(view)).show();
                         }
                     }
@@ -1132,15 +1132,6 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         // write the document content
 
         String directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/";
-//        File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-//
-//        File folder = new File(root.getAbsolutePath());
-//        Log.e("Tag", folder.getAbsolutePath());
-//        if (!folder.exists()) {
-//            folder.mkdirs();
-//        }
-//        String directory_path = folder.getAbsolutePath() + "/mypdf/";
-
         File file = new File(directory_path);
         if (!file.exists()) {
             file.mkdirs();
@@ -1165,20 +1156,21 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         // close the document
         document.close();
 
-        if(first_time == 0) {
-            FileData fileData = new FileData();
-            fileData.setName(fname);
-            fileData.setDuration(formatLastModifiedDate(filePath.lastModified()));
-            fileData.setFile_type("f");
-            fileData.setFile_path(filePath);
-            fileDataArrayList.add(fileData);
+
+        FileData fileData = new FileData();
+        fileData.setName(fname);
+        fileData.setDuration(formatLastModifiedDate(filePath.lastModified()));
+        fileData.setFile_type("f");
+        fileData.setFile_path(filePath);
+        fileDataArrayList.add(fileData);
 //            setSeectionPagerAdapter();
 //            Intent intent = new Intent(MainActivity.this, OpenPdfActivity.class);
 //            intent.putExtra("pdf_name", filePath.toString());
 //            startActivity(intent);
 
-        }
         first_time = 0;
+        sortListByDateName(sort_type);
+        setList();
 //        finish();
 //        startActivity(getIntent());
     }
