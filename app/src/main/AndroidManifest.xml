@@ -45,6 +45,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+      <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.pdfeditormadtpeeps.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity
             android:name=".Activity.MainActivity"
             android:theme="@style/Theme.PDFEditorMADTPEEPS.NoActionBar"  android:exported="true" />
