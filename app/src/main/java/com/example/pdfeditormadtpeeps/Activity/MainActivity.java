@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -38,6 +40,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -46,16 +50,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.pdfeditormadtpeeps.Interface.MergeFilesListener;
 import com.example.pdfeditormadtpeeps.Interface.OnPDFCreatedInterface;
 import com.example.pdfeditormadtpeeps.Interface.OnSelectionListner;
 import com.example.pdfeditormadtpeeps.Model.FileData;
 import com.example.pdfeditormadtpeeps.R;
 import com.example.pdfeditormadtpeeps.Utility.Constants;
 import com.example.pdfeditormadtpeeps.Utility.CreatePdf;
+import com.example.pdfeditormadtpeeps.Utility.DialogUtils;
 import com.example.pdfeditormadtpeeps.Utility.EqualSpacingItemDecoration;
 import com.example.pdfeditormadtpeeps.Utility.FileUtils;
 import com.example.pdfeditormadtpeeps.Utility.ImageToPDFOptions;
 import com.example.pdfeditormadtpeeps.Utility.ImageUtils;
+import com.example.pdfeditormadtpeeps.Utility.MergePdf;
 import com.example.pdfeditormadtpeeps.Utility.PageSizeUtils;
 import com.example.pdfeditormadtpeeps.Utility.PathUtil;
 import com.example.pdfeditormadtpeeps.Utility.StringUtils;
@@ -85,7 +92,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements OnPDFCreatedInterface, OnSelectionListner {
+public class MainActivity extends AppCompatActivity implements OnPDFCreatedInterface, OnSelectionListner, MergeFilesListener {
     ImageView iv_grid, iv_select, iv_name, iv_date;
     String list_type = "row";
     public int permission_flag = 0;
@@ -104,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     private String mPath;
     private FileUtils mFileUtils;
     private ImageToPDFOptions mPdfOptions;
-    private String mHomePath=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/";
+    private String mHomePath=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/",mPassword=null;;
     private int mMarginTop = 50;
     private int mMarginBottom = 38;
     private int mMarginLeft = 50;
@@ -164,9 +171,8 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 
         mRecyclerView.addItemDecoration(new EqualSpacingItemDecoration(12, EqualSpacingItemDecoration.VERTICAL));
         mRecyclerView.addItemDecoration(new EqualSpacingItemDecoration(12, EqualSpacingItemDecoration.HORIZONTAL));
-//        Toast.makeText(getActivity(), mParam2, Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this, fileDataArrayList, Toast.LENGTH_LONG).show();
         // create an Object for Adapter
-        sortListByDateName(sort_type);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -178,6 +184,13 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 openCreateDialog();
+            }
+        });
+
+        iv_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCreatefolderDialog();
             }
         });
 
@@ -214,6 +227,9 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                 ll_select.setVisibility(View.VISIBLE);
                 tv_done.setVisibility(View.GONE);
                 fab.setVisibility(View.VISIBLE);
+                btn_select = "0";
+                setList();
+                design_bottom_sheet.setVisibility(View.GONE);
 //                if (tabs.getSelectedTabPosition() == 0) {
 //                    mAboutDataListener.onDataReceived("0", "");
 //                } else {
@@ -230,13 +246,14 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
             }
         });
 
-        ll_select.setOnClickListener(new View.OnClickListener() {
+        tv_select.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view) {
                 ll_select.setVisibility(View.GONE);
                 tv_done.setVisibility(View.VISIBLE);
                 fab.setVisibility(View.GONE);
+                openWhenSelectPdf();
 //                if (tabs.getSelectedTabPosition() == 0) {
 //                    mAboutDataListener.onDataReceived("1", "open_bottom_dg");
 //                } else {
@@ -254,20 +271,177 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                 if(list_type.equals("row")) {
                     iv_grid.setImageResource(R.drawable.group_16863);
                     list_type = "grid";
+                    mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
                 } else {
                     iv_grid.setImageResource(R.drawable.group_16853);
                     list_type = "row";
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 }
+                sortListByDateName(sort_type);
+                setList();
 //                myViewModel.sendData(list_type);
             }
         });
+    }
+
+    private void openWhenSelectPdf() {
+        btn_select = "1";
+        List<FileData> fileDataListAll = mAdapter.getSelectedFiles();
+
+        fileDataListSelected = new ArrayList<>();
+        mFilePaths = new ArrayList<>();
+        for (int i = 0; i < fileDataListAll.size(); i++) {
+            if (fileDataListAll.get(i).getSelected()) {
+                fileDataListSelected.add(fileDataListAll.get(i));
+                mFilePaths.add(String.valueOf(fileDataListAll.get(i).getFile_path()));
+            }
+        }
+        if (fileDataListSelected.size() > 0) {
+            View bottomSheetview = MainActivity.this.getLayoutInflater().inflate(R.layout.bottom_selection_layout, null);
+
+            design_bottom_sheet.setVisibility(View.VISIBLE);
+            ll_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    androidx.appcompat.app.AlertDialog myQuittingDialogBox = new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                            // set message, title, and icon
+                            .setMessage("Are you sure want to delete " + fileDataListSelected.size() + " files?")
+
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface d, int whichButton) {
+                                    //your deleting code
+                                    for (int i = 0; i < fileDataListSelected.size(); i++) {
+                                        Log.d("PATH", fileDataListSelected.get(i).getFile_path().getPath());
+                                        for (int j=0;j<fileDataArrayList.size();j++) {
+                                            if(fileDataListSelected.get(i).getFile_path().equals(fileDataArrayList.get(j).getFile_path())) {
+                                                mDatabaseHelper.deleteRecord(fileDataArrayList.get(j).getName());
+                                                fileDataArrayList.get(j).getFile_path().delete();
+                                                fileDataArrayList.remove(j);
+                                            }
+                                        }
+                                    }
+
+                                    d.dismiss();
+                                    design_bottom_sheet.setVisibility(View.GONE);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+
+                            })
+                            .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create();
+                    myQuittingDialogBox.show();
+                }
+            });
+
+            iv_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ll_delete.performClick();
+                }
+            });
+
+            ll_share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                    shareIntent.setType("*/*");
+//                        Uri uri = Uri.fromFile(fileDataArrayList.get(pos).getFile_path());
+                    ArrayList<Uri> Uris = new ArrayList<>();
+                    for (int i = 0; i < fileDataListSelected.size(); i++) {
+                        Uri fileUri = FileProvider.getUriForFile(MainActivity.this,
+                                MainActivity.this.getPackageName() + ".provider", fileDataListSelected.get(i).getFile_path());
+                        Uris.add(fileUri);
+                    }
+
+                    shareIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, Uris);
+                    startActivity(Intent.createChooser(shareIntent, "Share"));
+                    design_bottom_sheet.setVisibility(View.GONE);
+                }
+            });
+
+            ll_merge.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                @Override
+                public void onClick(View view) {
+                    mergeFiles(view);
+                    design_bottom_sheet.setVisibility(View.GONE);
+                }
+            });
+
+            ll_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    design_bottom_sheet.setVisibility(View.GONE);
+                    if(Constants.copy_flag == 0) {
+                        Constants.copy_flag = 1;
+                        Constants.fileDataListSelected = fileDataListSelected;
+                    }
+                }
+            });
+        } else {
+//                Toast.makeText(MainActivity.this, "Please select file", Toast.LENGTH_LONG).show();
+            setList();
+            design_bottom_sheet.setVisibility(View.GONE);
+        }
+    }
+
+    private void openCreatefolderDialog() {
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dlog_create_folder_layout);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        ImageView iv_close = (ImageView) dialog.findViewById(R.id.iv_close);
+        et_folder_name =  dialog.findViewById(R.id.et_folder_name);
+        tv_create =  dialog.findViewById(R.id.tv_create);
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        tv_create.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View view) {
+                if(!et_folder_name.getText().toString().isEmpty()) {
+                    if (checkPermission()) {
+                        // write the document content
+                        String directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/"+et_folder_name.getText().toString()+"/";
+                        File file = new File(directory_path);
+                        if (!file.exists()) {
+                            file.mkdirs();
+                        }
+                        Toast.makeText(getApplicationContext(), "Succesfully folder created!", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                } else {
+                    et_folder_name.setError("Please type folder name!");
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     private void setList() {
         for (int i=0;i<fileDataArrayList.size();i++) {
             fileDataArrayList.get(i).setSelected(false);
         }
-        mAdapter = new RecentFileadapter(this, fileDataArrayList, display_type, btn_select, this);
+        mAdapter = new RecentFileadapter(this, fileDataArrayList, list_type, btn_select, this);
         // set the adapter object to the Recyclerview
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -322,6 +496,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                 Log.d("FILE_NAME", files.get(i).getName());
                 Log.d("FILE_PATH", files.get(i).getPath());
             }
+            sortListByDateName(sort_type);
             setList();
 
         } catch (Exception e) {
@@ -355,6 +530,8 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                 dialog.dismiss();
 //                viewModelSort.sendData("name");
                 sort_type = "name";
+                sortListByDateName(sort_type);
+                mAdapter.notifyDataSetChanged();
             }
         });
 
@@ -365,6 +542,8 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                 dialog.dismiss();
 //                viewModelSort.sendData("date");
                 sort_type = "date";
+                sortListByDateName(sort_type);
+                mAdapter.notifyDataSetChanged();
             }
         });
 
@@ -434,6 +613,31 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void mergeFiles(final View view) {
+        String[] pdfpaths = mFilePaths.toArray(new String[0]);
+        new MaterialDialog.Builder(mActivity)
+                .title(R.string.creating_pdf)
+                .content(R.string.enter_file_name)
+                .input(getString(R.string.example), null, (dialog, input) -> {
+                    if (StringUtils.getInstance().isEmpty(input)) {
+                        StringUtils.getInstance().showSnackbar(mActivity, R.string.snackbar_name_not_blank);
+                    } else {
+                        if (!mFileUtils.isFileExist(input + getString(R.string.pdf_ext))) {
+                            new MergePdf(input.toString(), mHomePath, mPasswordProtected,
+                                    mPassword, this, "PDF Hero").execute(pdfpaths);
+                        } else {
+                            MaterialDialog.Builder builder = DialogUtils.getInstance().createOverwriteDialog(mActivity);
+                            builder.onPositive((dialog12, which) -> new MergePdf(input.toString(),
+                                    mHomePath, mPasswordProtected, mPassword,
+                                    this, "PDF Hero").execute(pdfpaths))
+                                    .onNegative((dialog1, which) -> mergeFiles(view)).show();
+                        }
+                    }
+                })
+                .show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onPDFCreated(boolean success, String path) {
         if (!success) {
@@ -454,15 +658,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 
     @Override
     public void onSelected() {
-
-    }
-
-    public interface OnAboutDataReceivedListener {
-        void onDataReceived(String btn_select, String open_bottom_dg);
-    }
-
-    public interface OnAboutDataReceivedDListener {
-        void onDataReceived(String btn_select, String open_bottom_dg);
+        openWhenSelectPdf();
     }
 
     private void resetValues() {
@@ -1000,5 +1196,27 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         Log.d("RESUME", "resume");
         fileDataArrayList = new ArrayList<>();
         getAllFiles();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void resetValues(boolean isPDFMerged, String path) {
+        if (isPDFMerged) {
+//            StringUtils.getInstance().getSnackbarwithAction(mActivity, R.string.pdf_merged)
+//                    .setAction(R.string.snackbar_viewAction,
+//                            v -> mFileUtils.openFile(path, FileUtils.FileType.e_PDF)).show();
+            StringUtils.getInstance().showSnackbar(mActivity, R.string.pdf_merged);
+            finish();
+            startActivity(getIntent());
+        } else
+            StringUtils.getInstance().showSnackbar(mActivity, R.string.file_access_error);
+
+        mFilePaths.clear();
+        mPasswordProtected = false;
+    }
+
+    @Override
+    public void mergeStarted() {
+
     }
 }
