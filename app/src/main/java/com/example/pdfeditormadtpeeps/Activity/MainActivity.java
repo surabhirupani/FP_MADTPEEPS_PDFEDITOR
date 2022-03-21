@@ -1156,21 +1156,25 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         // close the document
         document.close();
 
+        if(first_time == 0) {
 
-        FileData fileData = new FileData();
-        fileData.setName(fname);
-        fileData.setDuration(formatLastModifiedDate(filePath.lastModified()));
-        fileData.setFile_type("f");
-        fileData.setFile_path(filePath);
-        fileDataArrayList.add(fileData);
+
+            FileData fileData = new FileData();
+            fileData.setName(fname);
+            fileData.setDuration(formatLastModifiedDate(filePath.lastModified()));
+            fileData.setFile_type("f");
+            fileData.setFile_path(filePath);
+            fileDataArrayList.add(fileData);
 //            setSeectionPagerAdapter();
 //            Intent intent = new Intent(MainActivity.this, OpenPdfActivity.class);
 //            intent.putExtra("pdf_name", filePath.toString());
 //            startActivity(intent);
 
+
+            sortListByDateName(sort_type);
+            setList();
+        }
         first_time = 0;
-        sortListByDateName(sort_type);
-        setList();
 //        finish();
 //        startActivity(getIntent());
     }
