@@ -1,0 +1,14 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@drawable/group_16987"
+        android:state_checked="true"
+        android:state_pressed="true" />
+    <item
+        android:drawable="@drawable/group_16982"
+        android:state_pressed="true" />
+    <item
+        android:drawable="@drawable/group_16982"
+        android:state_checked="true" />
+    <item
+        android:drawable="@drawable/group_16987" />
+</selector>
