@@ -16,8 +16,6 @@ public class Constants {
     public static final String IMAGE_EDITOR_KEY = "first";
     public static final String DEFAULT_FONT_SIZE_TEXT = "DefaultFontSize";
     public static final int DEFAULT_FONT_SIZE = 11;
-    public static final String PREVIEW_IMAGES = "preview_images";
-    public static final String DATABASE_NAME = "PdfHeroDB.db";
     public static final String DEFAULT_FONT_FAMILY_TEXT = "DefaultFontFamily";
     public static final String DEFAULT_FONT_FAMILY = "TIMES_ROMAN";
     public static final String DEFAULT_FONT_COLOR_TEXT = "DefaultFontColor";

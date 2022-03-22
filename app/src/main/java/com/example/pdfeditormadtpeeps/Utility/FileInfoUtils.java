@@ -41,6 +41,7 @@ public class FileInfoUtils {
         if (length > KiB) {
             return format.format(length / KiB) + " kb";
         }
-        return format.format(length) + " b";
+//        return format.format(length) + " b";
+        return String.format("%.2f MB", (double) file.length() / (1024 * 1024));
     }
 }

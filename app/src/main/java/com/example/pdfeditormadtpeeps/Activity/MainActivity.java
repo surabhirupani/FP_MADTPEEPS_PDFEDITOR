@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     private boolean mPasswordProtected = false;
     private MaterialDialog mMaterialDialog;
     LinearLayout design_bottom_sheet, llEmptyBox;
+    FloatingActionButton fab;
    
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         // create an Object for Adapter
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+       fab = findViewById(R.id.fab);
         resetValues();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -310,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
+                                @SuppressLint("RestrictedApi")
                                 public void onClick(DialogInterface d, int whichButton) {
                                     //your deleting code
                                     for (int i = 0; i < fileDataListSelected.size(); i++) {
@@ -324,7 +326,12 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                                     }
 
                                     d.dismiss();
+                                    ll_select.setVisibility(View.VISIBLE);
+                                    tv_done.setVisibility(View.GONE);
+                                    fab.setVisibility(View.VISIBLE);
+                                    btn_select = "0";
                                     design_bottom_sheet.setVisibility(View.GONE);
+                                    setList();
                                     mAdapter.notifyDataSetChanged();
                                 }
 
@@ -372,6 +379,10 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                 @Override
                 public void onClick(View view) {
                     mergeFiles(view);
+                    ll_select.setVisibility(View.VISIBLE);
+                    tv_done.setVisibility(View.GONE);
+                    fab.setVisibility(View.VISIBLE);
+                    btn_select = "0";
                     design_bottom_sheet.setVisibility(View.GONE);
                 }
             });
@@ -804,7 +815,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                     Random generator = new Random();
                     int n = 100000;
                     n = generator.nextInt(n);
-                    String fname = "pdfhero-" + n;
+                    String fname = "pdfeditor-" + n;
 //                    save(false, fname);
 
                     mFileUtils.openSaveDialog(fname, ext, filename -> save(false, filename));
@@ -877,7 +888,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //                            Random generator = new Random();
 //                            int n = 100000;
 //                            n = generator.nextInt(n);
-//                            String fname = "pdfhero-" + n;
+//                            String fname = "pdfeditor-" + n;
 //                            save(false, fname);
 //
 ////                    mFileUtils.openSaveDialog(preFillName, ext, filename -> save(isGrayScale, filename));
@@ -916,7 +927,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //                    Random generator = new Random();
 //                    int n = 10000;
 //                    n = generator.nextInt(n);
-//                    String fname = "pdfhero-" + n;
+//                    String fname = "pdfeditor-" + n;
 //                    save(false, fname);
 //                }
                 break;
@@ -1148,7 +1159,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         Random generator = new Random();
         int n = 100000;
         n = generator.nextInt(n);
-        String fname = "pdfhero-" + n + ".pdf";
+        String fname = "pdfeditor-" + n + ".pdf";
         String targetPdf = directory_path+fname;
         File filePath = new File(targetPdf);
         try {
