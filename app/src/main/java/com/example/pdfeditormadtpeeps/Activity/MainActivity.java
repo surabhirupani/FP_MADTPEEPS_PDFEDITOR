@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     private ArrayList<String> mFilePaths;
     private boolean mPasswordProtected = false;
     private MaterialDialog mMaterialDialog;
-    LinearLayout design_bottom_sheet;
+    LinearLayout design_bottom_sheet, llEmptyBox;
    
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         iv_delete = findViewById(R.id.iv_delete);
         ll_merge = findViewById(R.id.ll_merge);
         ll_share = findViewById(R.id.ll_share);
+        llEmptyBox = findViewById(R.id.llEmptyBox);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -438,12 +439,19 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     }
 
     private void setList() {
-        for (int i=0;i<fileDataArrayList.size();i++) {
-            fileDataArrayList.get(i).setSelected(false);
+        if(fileDataArrayList.size() > 0) {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            llEmptyBox.setVisibility(View.GONE);
+            for (int i = 0; i < fileDataArrayList.size(); i++) {
+                fileDataArrayList.get(i).setSelected(false);
+            }
+            mAdapter = new RecentFileadapter(this, fileDataArrayList, list_type, btn_select, this);
+            // set the adapter object to the Recyclerview
+            mRecyclerView.setAdapter(mAdapter);
+        } else {
+            mRecyclerView.setVisibility(View.GONE);
+            llEmptyBox.setVisibility(View.VISIBLE);
         }
-        mAdapter = new RecentFileadapter(this, fileDataArrayList, list_type, btn_select, this);
-        // set the adapter object to the Recyclerview
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     private boolean checkPermission() {
@@ -1156,21 +1164,25 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         // close the document
         document.close();
 
+        if(first_time == 0) {
 
-        FileData fileData = new FileData();
-        fileData.setName(fname);
-        fileData.setDuration(formatLastModifiedDate(filePath.lastModified()));
-        fileData.setFile_type("f");
-        fileData.setFile_path(filePath);
-        fileDataArrayList.add(fileData);
+
+            FileData fileData = new FileData();
+            fileData.setName(fname);
+            fileData.setDuration(formatLastModifiedDate(filePath.lastModified()));
+            fileData.setFile_type("f");
+            fileData.setFile_path(filePath);
+            fileDataArrayList.add(fileData);
 //            setSeectionPagerAdapter();
 //            Intent intent = new Intent(MainActivity.this, OpenPdfActivity.class);
 //            intent.putExtra("pdf_name", filePath.toString());
 //            startActivity(intent);
 
+
+            sortListByDateName(sort_type);
+            setList();
+        }
         first_time = 0;
-        sortListByDateName(sort_type);
-        setList();
 //        finish();
 //        startActivity(getIntent());
     }
