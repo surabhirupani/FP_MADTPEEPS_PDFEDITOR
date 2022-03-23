@@ -3,6 +3,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/tv_rounded" android:state_pressed="true"/>
-    <item android:drawable="@drawable/et_rounded"/>
+    <item android:drawable="@drawable/edittext_bg"/>
 
 </selector>

@@ -72,6 +72,7 @@ import com.example.pdfeditormadtpeeps.Utility.PrintDocumentAdapterHelper;
 import com.example.pdfeditormadtpeeps.Utility.StringUtils;
 
 import com.example.pdfeditormadtpeeps.adapter.EditImageAdapter;
+import com.example.pdfeditormadtpeeps.adapter.ImagePdfAdapter;
 import com.example.pdfeditormadtpeeps.database.DatabaseHelper;
 
 import com.github.barteksc.pdfviewer.PDFView;

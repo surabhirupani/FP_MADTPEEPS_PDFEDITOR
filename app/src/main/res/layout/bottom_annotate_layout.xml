@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottom_bg_rounded"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/design_bottom_sheet"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="55dp"
+        android:layout_height="5dp"
+        android:background="@drawable/view_bg"/>
+
+    <com.example.pdfeditormadtpeeps.CustomWidgets.BoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Annotate"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="17dp"
+        android:textSize="22sp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Draw"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@drawable/group_16981"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:paddingBottom="5dp"
+            android:id="@+id/btn_draw"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Text"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:layout_marginLeft="12dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/button_bg"
+            android:id="@+id/btn_text"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Highlight"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@drawable/button_bg"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="12dp"
+            android:id="@+id/btn_highlight"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_color"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/im_Eraser"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/e2"
+            android:tint="@color/grey"
+            android:layout_marginLeft="25dp"/>
+
+        <Button
+            android:id="@+id/btn_pink"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/pink"
+            android:layout_marginLeft="18dp"
+            android:padding="8dp"
+            android:background="@drawable/btn_bg_selector" />
+        <!--
+                <Button
+                    android:id="@+id/btn_red"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="60dp"
+                    android:background="@drawable/btn_bg_selector"
+                    android:padding="8dp" />
+        -->
+        <Button
+            android:id="@+id/btn_blue"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/blue"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+
+        <Button
+            android:id="@+id/btn_orange"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/orange"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_rama"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/rama"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_purple"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/btn_bg_selector"
+            android:backgroundTint="@color/purpul"
+            android:padding="8dp" />
+
+
+        <ImageButton
+            android:id="@+id/imgColorpicker"
+            android:layout_marginLeft="18dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            app:srcCompat="@drawable/ic_add"
+            android:tint="@color/colorWhite"
+            android:background="@drawable/color_shape_rounded"
+            android:enabled="false"
+            android:backgroundTint="@color/grey"
+            android:padding="8dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_opacity"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opacity"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="45dp"
+            android:thumb="@color/transparent"
+            android:layout_weight="1"
+            android:progress="100"
+            android:id="@+id/sb_opacity"
+            android:progressDrawable="@drawable/seekbar_progress"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="7dp"
+            android:id="@+id/tv_opacity"
+            android:textSize="14sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_brush"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brush Size"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:thumb="@color/transparent"
+            android:layout_weight="1"
+            android:progress="10"
+            android:id="@+id/sb_brush"
+            android:progressDrawable="@drawable/seekbar_progress"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10%"
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="7dp"
+            android:id="@+id/tv_brush"
+            android:textSize="14sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_mode"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mode"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:textSize="15sp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:id="@+id/rg_mode">
+
+            <RadioButton
+                android:id="@+id/rb_mode1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:button="@drawable/radiobutton_mode1"
+                android:checked="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/rb_mode2"
+                android:layout_marginLeft="20dp"
+                android:button="@drawable/radiobutton_mode2"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/rb_mode3"
+                android:layout_marginLeft="20dp"
+                android:button="@drawable/radiobutton_mode3"
+                />
+        </RadioGroup>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_text"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Text"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+        <Button
+            android:id="@+id/btn_txtPink"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="75dp"
+            android:backgroundTint="@color/pink"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+        <Button
+            android:id="@+id/btn_txtBlue"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/blue"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+
+        <Button
+            android:id="@+id/btn_txtOrange"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/orange"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_txtRama"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/rama"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_txtPurple"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/btn_bg_selector"
+            android:backgroundTint="@color/purpul"
+            android:padding="8dp" />
+
+
+        <ImageButton
+            android:id="@+id/imgTextColorpicker"
+            android:layout_marginLeft="18dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            app:srcCompat="@drawable/ic_add"
+            android:tint="@color/colorWhite"
+            android:background="@drawable/color_shape_rounded"
+            android:enabled="false"
+            android:backgroundTint="@color/grey"
+            android:padding="8dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_background"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Background"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+        <Button
+            android:id="@+id/btn_bgPink"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="16sp"
+            android:backgroundTint="@color/pink"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+        <Button
+            android:id="@+id/btn_bgBlue"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/blue"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+
+        <Button
+            android:id="@+id/btn_bgOrange"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/orange"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_bgRama"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:backgroundTint="@color/rama"
+            android:background="@drawable/btn_bg_selector"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_bgPurple"
+            android:layout_marginLeft="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/btn_bg_selector"
+            android:backgroundTint="@color/purpul"
+            android:padding="8dp" />
+
+
+        <ImageButton
+            android:id="@+id/imgBackgroundColorpicker"
+            android:layout_marginLeft="18dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:src="@drawable/ic_add"
+            android:tint="@color/colorWhite"
+            android:background="@drawable/color_shape_rounded"
+            android:enabled="false"
+            android:backgroundTint="@color/grey"
+            android:padding="8dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_font"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Font"
+            android:textColor="@color/colorWhite"
+            android:layout_weight="1"
+            android:textSize="15sp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poppins"
+            android:layout_gravity="end|center"
+            android:textColor="@color/colorTextGrey"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/right_arrow"
+            android:textSize="15sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_fontsize"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Font Size"
+            android:textColor="@color/colorWhite"
+            android:layout_weight="1"
+            android:textSize="15sp"/>
+
+        <!--
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14 px"
+                    android:layout_gravity="end|center"
+                    android:textColor="@color/colorTextGrey"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/layer"
+                    android:textSize="15sp"/>
+        -->
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/transparent"
+                android:id="@+id/spSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/layer"
+                />
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_alignment"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alignment"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:id="@+id/rg_align">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/rb_align_left"
+                android:button="@drawable/radiobutton_alignleft"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/rb_align_center"
+                android:layout_marginLeft="20dp"
+                android:checked="true"
+                android:button="@drawable/radiobutton_aligncenter"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/rb_align_right"
+                android:layout_marginLeft="20dp"
+                android:button="@drawable/radiobutton_alignright"
+                />
+        </RadioGroup>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>

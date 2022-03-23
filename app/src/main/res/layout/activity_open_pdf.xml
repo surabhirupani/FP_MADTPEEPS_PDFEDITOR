@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context="com.example.pdfeditormadtpeeps.Activity.FolderActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/path_593"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:id="@+id/iv_back"
+                android:paddingRight="10dp"/>
+
+
+
+            <com.example.pdfeditormadtpeeps.CustomWidgets.ThinTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Done"
+                android:textColor="@color/colorAccent"
+                android:gravity="end"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                android:layout_marginLeft="100dp"
+                android:textSize="17sp"/>
+
+            <ImageView
+                android:id="@+id/tv_done"
+                android:visibility="gone"
+                android:src="@drawable/save_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+            </ImageView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <com.example.pdfeditormadtpeeps.CustomWidgets.ExtraBoldTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Abc.PDF"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:id="@+id/tv_file_name"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_share"
+                android:src="@drawable/group_16914"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_more"
+                android:src="@drawable/group_16913"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="match_parent"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="100dp"
+        android:layout_height="match_parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_images"
+        android:layout_marginTop="110dp"
+        android:visibility="gone"
+        android:layout_marginBottom="100dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
+        android:id="@+id/rl_viewpager"
+        android:visibility="gone"
+        android:layout_marginBottom="100dp">
+
+
+    <com.example.pdfeditormadtpeeps.Utility.CustomViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="match_parent">
+
+    </com.example.pdfeditormadtpeeps.Utility.CustomViewPager>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@drawable/previous_img"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:id="@+id/iv_prev"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@drawable/next_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/iv_next"/>
+
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+       android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/group_16976" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/group_16975" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:src="@drawable/group_16980" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="120dp"
+        android:id="@+id/ll_layout1"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_16979" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Layout"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="17dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="200dp"
+        android:id="@+id/ll_insert"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_16978" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insert"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="17dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="280dp"
+        android:id="@+id/ll_annotation"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_16977" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Annotate"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="17dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -8,20 +8,32 @@
         <entry key="app/src/main/res/drawable/edittext_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/et_rounded.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_empty_todolist.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/txt_bg.xml" value="0.105" />
+        <entry key="app/src/main/res/layout/activity_folder.xml" value="0.21030042918454936" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_open_pdf.xml" value="0.21030042918454936" />
+        <entry key="app/src/main/res/layout/activity_rearrange_pdf_pages.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/add_text_dialog.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/bottom_annotate_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/bottom_create_layout.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/bottom_insert_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/bottom_more_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_reorder_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/bottom_selection_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_share_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/bottom_sortby_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_font.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/dlog_create_folder_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dlog_rename_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_rearrange_images.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/pdf_preview_item.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/row_file_grid_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_file_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/set_page_size_dialog.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.215625" />
       </map>
     </option>
   </component>

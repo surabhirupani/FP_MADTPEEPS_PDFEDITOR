@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_bg_rounded"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/design_bottom_sheet"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="55dp"
+        android:layout_height="5dp"
+        android:background="@drawable/view_bg"/>
+
+    <com.example.pdfeditormadtpeeps.CustomWidgets.BoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Layout"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="22sp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_reorder"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reorder"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reorder"
+            android:layout_weight="1"
+            android:textColor="#A6FFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="15sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/ll_addpage"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_page1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Page"
+            android:layout_weight="1"
+            android:textColor="#A6FFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="15sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>

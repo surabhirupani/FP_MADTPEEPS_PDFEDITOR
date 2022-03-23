@@ -1,5 +1,6 @@
 package com.example.pdfeditormadtpeeps.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -30,7 +31,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pdfeditormadtpeeps.Activity.FolderActivity;
 import com.example.pdfeditormadtpeeps.Activity.MainActivity;
+import com.example.pdfeditormadtpeeps.Activity.OpenPdfActivity;
 import com.example.pdfeditormadtpeeps.Interface.OnSelectionListner;
 import com.example.pdfeditormadtpeeps.Model.FileData;
 import com.example.pdfeditormadtpeeps.R;
@@ -105,7 +108,7 @@ public class RecentFileadapter extends
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, @SuppressLint("RecyclerView") int position) {
         final int pos = position;
         viewHolder.tv_name.setText(fileDataList.get(position).getName());
         viewHolder.tv_duration.setText(fileDataList.get(position).getDuration());
@@ -190,9 +193,9 @@ public class RecentFileadapter extends
                             Toast.makeText(context, "Zip created at "+fileDataList.get(pos).getFile_path().toString() +".zip", Toast.LENGTH_LONG).show();
                         }
                         else {
-//                            Intent intent = new Intent(context, OpenPdfActivity.class);
-//                            intent.putExtra("pdf_name", fileDataList.get(pos).getFile_path().toString());
-//                            context.startActivity(intent);
+                            Intent intent = new Intent(context, OpenPdfActivity.class);
+                            intent.putExtra("pdf_name", fileDataList.get(pos).getFile_path().toString());
+                            context.startActivity(intent);
                             dialog.dismiss();
                         }
                     }
@@ -478,12 +481,13 @@ public class RecentFileadapter extends
         });
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 if(fileDataList.get(position).getFile_type().equals("d")){
-//                    Intent intent = new Intent(context, FolderActivity.class);
-//                    intent.putExtra("folder_name", fileDataList.get(pos).getName());
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context, FolderActivity.class);
+                    intent.putExtra("folder_name", fileDataList.get(pos).getName());
+                    context.startActivity(intent);
                 } else {
                     if(btn_select.equals("1")) {
                         CheckBox cb = (CheckBox) v.getTag();
@@ -499,9 +503,9 @@ public class RecentFileadapter extends
                             mDatabaseHelper.deleteRecord(fileDataList.get(pos).getName());
                             mDatabaseHelper.insertRecord(String.valueOf(fileDataList.get(pos).getFile_path()),
                             fileDataList.get(pos).getDuration(), fileDataList.get(pos).getFile_type(), fileDataList.get(pos).getName());
-//                            Intent intent = new Intent(context, OpenPdfActivity.class);
-//                            intent.putExtra("pdf_name", fileDataList.get(pos).getFile_path().toString());
-//                            context.startActivity(intent);
+                            Intent intent = new Intent(context, OpenPdfActivity.class);
+                            intent.putExtra("pdf_name", fileDataList.get(pos).getFile_path().toString());
+                            context.startActivity(intent);
                         } catch (Exception e) {
 
                         }

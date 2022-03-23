@@ -872,9 +872,9 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-//                        Intent intent = new Intent(this, OpenPdfActivity.class);
-//                        intent.putExtra("pdf_name", dest_file.getPath());
-//                        startActivity(intent);
+                        Intent intent = new Intent(this, OpenPdfActivity.class);
+                        intent.putExtra("pdf_name", dest_file.getPath());
+                        startActivity(intent);
 
 
 //                        mImagesUri.clear();
@@ -1185,9 +1185,9 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
             fileData.setFile_path(filePath);
             fileDataArrayList.add(fileData);
 //            setSeectionPagerAdapter();
-//            Intent intent = new Intent(MainActivity.this, OpenPdfActivity.class);
-//            intent.putExtra("pdf_name", filePath.toString());
-//            startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, OpenPdfActivity.class);
+            intent.putExtra("pdf_name", filePath.toString());
+            startActivity(intent);
 
 
             sortListByDateName(sort_type);

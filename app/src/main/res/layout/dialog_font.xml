@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="420dp"
+    android:paddingBottom="15dp"
+    android:background="@drawable/edittext_bg"
+    android:orientation="vertical"
+    android:layout_marginLeft="22dp"
+    android:layout_marginRight="22dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:orientation="horizontal">
+
+        <com.example.pdfeditormadtpeeps.CustomWidgets.BoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="Select Font"
+            android:textSize="22sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_16878"
+            android:padding="5dp"
+            android:id="@+id/iv_close"/>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont1"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Aladin Regular"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont2"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Poppins Regular"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont3"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Satisfy"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont4"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Synemono"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont5"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Electrolize"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont6"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Emily Scandy"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont7"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Arapey"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont8"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Short Stack"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont9"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Aclonica"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont10"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Almendra"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont11"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Bungee Shade"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont12"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Chonburi"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont13"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Doppio One"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont14"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Passero One"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont15"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Croissant One"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont16"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Poly"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont17"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Averialibre"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont18"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Philosopher"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont19"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Shanti"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont20"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Faustina"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont21"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Gudea"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont22"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Public Sans"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont23"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Amaranth"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont24"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Itim"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont25"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Sansita"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont26"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Scada"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont27"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="B612"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont28"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Charm"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont29"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Mirza"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="@color/colorGrey"
+                android:id="@+id/tvFont30"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/txt_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Esteban"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
+    <!--
+      <LinearLayout
+        android:padding="15sp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="315sp"
+        android:paddingLeft="10dp"
+        android:orientation="vertical"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="Fonts"
+            android:textSize="30dp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="#000"></View>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont1"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Aladin Regular"
+            android:textSize="15sp" />
+       <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont2"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Poppins Regular"
+            android:textSize="15sp" />
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont3"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Satisfy"
+            android:textSize="15sp" />
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont4"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Synemono"
+            android:textSize="15sp" />
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont5"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Electrolize"
+            android:textSize="15sp" />
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont6"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Emily Scandy"
+            android:textSize="15sp" />
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont7"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Arapey"
+            android:textSize="15sp" />
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/tvFont8"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Short Stack"
+            android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont9"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Aclonica"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont10"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Almendra"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont11"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Bungee Shade"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont12"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Chonburi"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont13"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Doppio One"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont14"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Passero One"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont15"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Croissant One"
+                android:textSize="15sp" />
+
+
+
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont16"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Poly"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont17"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Averialibre"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont18"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Philosopher"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont19"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Shanti"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont20"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Faustina"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont21"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Gudea"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont22"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Public Sans"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont23"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Amaranth"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont24"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Itim"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont25"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Sansita"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont26"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Scada"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont27"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="B612"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont28"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Charm"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont29"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Mirza"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/tvFont30"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Esteban"
+                android:textSize="15sp" />
+
+
+
+
+        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>-->
