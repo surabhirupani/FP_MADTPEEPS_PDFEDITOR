@@ -57,17 +57,21 @@ import com.example.pdfeditormadtpeeps.Model.FileData;
 import com.example.pdfeditormadtpeeps.R;
 import com.example.pdfeditormadtpeeps.Utility.Constants;
 import com.example.pdfeditormadtpeeps.Utility.CreatePdf;
+import com.example.pdfeditormadtpeeps.Utility.CustomViewPager;
 import com.example.pdfeditormadtpeeps.Utility.EqualSpacingItemDecoration;
 import com.example.pdfeditormadtpeeps.Utility.FileInfoUtils;
 import com.example.pdfeditormadtpeeps.Utility.FileUtils;
+import com.example.pdfeditormadtpeeps.Utility.ImageToPDFOptions;
 import com.example.pdfeditormadtpeeps.Utility.ImageUtils;
 import com.example.pdfeditormadtpeeps.Utility.PDFUtils;
 import com.example.pdfeditormadtpeeps.Utility.PageSizeUtils;
 
+import com.example.pdfeditormadtpeeps.Utility.PdfToImages;
 import com.example.pdfeditormadtpeeps.Utility.PermissionsUtils;
 import com.example.pdfeditormadtpeeps.Utility.PrintDocumentAdapterHelper;
 import com.example.pdfeditormadtpeeps.Utility.StringUtils;
 
+import com.example.pdfeditormadtpeeps.adapter.EditImageAdapter;
 import com.example.pdfeditormadtpeeps.database.DatabaseHelper;
 
 import com.github.barteksc.pdfviewer.PDFView;
