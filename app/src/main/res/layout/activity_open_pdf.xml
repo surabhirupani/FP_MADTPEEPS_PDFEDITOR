@@ -46,7 +46,8 @@
             <ImageView
                 android:id="@+id/tv_done"
                 android:visibility="gone"
-                android:src="@drawable/save_icon"
+                android:tint="@color/colorWhite"
+                android:src="@drawable/ic_baseline_save_24"
                 android:layout_width="30dp"
                 android:layout_height="30dp">
 
@@ -124,7 +125,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:src="@drawable/previous_img"
+            android:src="@drawable/imageedit_3_5666330682"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:visibility="gone"
@@ -134,7 +135,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:src="@drawable/next_img"
+            android:src="@drawable/imageedit_1_4290664416"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:id="@+id/iv_next"/>
@@ -142,36 +143,41 @@
     </RelativeLayout>
 
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/iv_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-       android:backgroundTint="@color/colorAccent"
-        android:src="@drawable/group_16976" />
+        android:backgroundTint="@color/colorAccent"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_baseline_edit_24" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="100dp"
+        android:layout_marginRight="85dp"
         android:layout_marginBottom="35dp"
         android:src="@drawable/group_16975" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:visibility="gone"
-        android:src="@drawable/group_16980" />
+        android:backgroundTint="@color/colorAccent"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_baseline_close_24" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="120dp"
+        android:layout_marginRight="90dp"
         android:id="@+id/ll_layout1"
         android:visibility="gone"
         android:orientation="vertical">
@@ -196,7 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="200dp"
+        android:layout_marginRight="170dp"
         android:id="@+id/ll_insert"
         android:visibility="gone"
         android:orientation="vertical">
@@ -221,7 +227,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="280dp"
+        android:layout_marginRight="250dp"
         android:id="@+id/ll_annotation"
         android:visibility="gone"
         android:orientation="vertical">

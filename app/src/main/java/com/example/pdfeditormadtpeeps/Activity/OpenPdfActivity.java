@@ -81,6 +81,7 @@ import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnTapListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -103,13 +104,14 @@ import ja.burhanrashid52.photoeditor.ViewType;
 import top.defaults.colorpicker.ColorPickerPopup;
 
 public class OpenPdfActivity extends AppCompatActivity implements OnPdfReorderedInterface, View.OnClickListener, ExtractImagesListener, OnPhotoEditorListener, OnPDFCreatedInterface, OnPageChangeListener {
-    ImageView iv_back, iv_share, iv_more, iv_edit, iv_layout, iv_close;
+    ImageView iv_back, iv_share, iv_more, iv_layout;
     int layout_flag = 0;
     LinearLayoutCompat ll_layout1, ll_insert, ll_annotation, ll_color, ll_opacity, ll_brush, ll_mode,
         ll_text, ll_background, ll_font, ll_fontsize, ll_alignment, ll_reorder, ll_addpage, ll_addImage;
     Button btn_highlight, btn_draw, btn_text;
     TextView tv_opacity, tv_brush, tv_file_name;
     AppCompatSeekBar sb_opacity, sb_brush;
+    FloatingActionButton iv_edit, iv_close;
     File file_path;
     File to = null;
     File from = null;
