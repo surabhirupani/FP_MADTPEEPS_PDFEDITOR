@@ -604,7 +604,6 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             }
         });
         btn_draw.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 im_Eraser.setVisibility(View.VISIBLE);
@@ -617,8 +616,6 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
                 btn_highlight.setBackgroundResource(R.drawable.button_bg);
                 btn_draw.setBackgroundResource(R.drawable.group_16981);
                 btn_text.setBackgroundResource(R.drawable.button_bg);
-                btn_draw.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#226A63")));
-                btn_text.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3C444E")));
                 ll_color.setVisibility(View.VISIBLE);
                 ll_mode.setVisibility(View.GONE);
                 ll_opacity.setVisibility(View.VISIBLE);
@@ -633,14 +630,11 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             }
         });
         btn_text.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 btnSelected = "Text";
 
                // Toast.makeText(getApplicationContext(),btnSelected,Toast.LENGTH_LONG).show();
-                btn_text.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#226A63")));
-                btn_draw.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3C444E")));
                 btn_highlight.setBackgroundResource(R.drawable.button_bg);
                 btn_draw.setBackgroundResource(R.drawable.button_bg);
                 btn_text.setBackgroundResource(R.drawable.group_16981);
