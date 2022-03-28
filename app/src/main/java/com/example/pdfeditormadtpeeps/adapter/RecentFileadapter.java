@@ -286,7 +286,7 @@ public class RecentFileadapter extends
                            // context.startActivity(Intent.createChooser(intent, "Send email..."));
                         }
                         else {
-                            final PrintDocumentAdapter mPrintDocumentAdapter = new PrintDocumentAdapterHelper(fileDataList.get(pos).getFile_path());
+                            final PrintDocumentAdapter mPrintDocumentAdapter = new PrintDocumentAdapterHelper(context, fileDataList.get(pos).getName(),fileDataList.get(pos).getFile_path().getPath());
                             PrintManager printManager = (PrintManager) context
                                     .getSystemService(Context.PRINT_SERVICE);
                             String jobName = context.getString(R.string.app_name) + " Document";
