@@ -21,6 +21,11 @@
     <string name="bundleKey">ImageUri</string>
     <string name="whatsappToast">Sorry! Images could not be added. Please select the images from our **Select Images** option.</string>
     <string name="successToast">Images successfully added.</string>
+    <string name="ask_again_text">Ask Again</string>
+    <string name="one_more_thing_text">One more thing!</string>
+    <string name="storage_manager_permission_rationale">In Android 11, you need to allow a special storage permission</string>
+    <string name="close_app_text">Close App</string>
+    <string name="allow_text">Allow</string>
 
     <!-- Navigation drawer strings -->
     <string name="create_pdf">Create PDF</string>
