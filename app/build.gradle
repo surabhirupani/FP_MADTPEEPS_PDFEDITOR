@@ -75,6 +75,7 @@ dependencies {
 
     // persistence room library - for db operations
     implementation 'android.arch.persistence.room:runtime:1.1.1'
+    implementation files('libs/aspose-cells-19.3-android.via.java.jar')
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
