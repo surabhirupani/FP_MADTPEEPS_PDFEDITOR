@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.16203703703703703" />
+        <entry key="app/src/main/res/drawable/bottom_bg_rounded.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/btn_normal.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/btn_rounded.xml" value="0.1375" />
+        <entry key="app/src/main/res/drawable/button_bg.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/edittext_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/et_rounded.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_empty_todolist.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/radiobutton_alignleft.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/txt_bg.xml" value="0.105" />
         <entry key="app/src/main/res/layout/activity_folder.xml" value="0.21030042918454936" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
@@ -18,7 +22,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/add_text_dialog.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/bottom_annotate_layout.xml" value="0.215625" />
-        <entry key="app/src/main/res/layout/bottom_create_layout.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/bottom_create_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_insert_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/bottom_more_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_reorder_layout.xml" value="0.215625" />

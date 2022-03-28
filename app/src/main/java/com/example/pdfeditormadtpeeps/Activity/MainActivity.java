@@ -4,6 +4,8 @@ import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+import static com.example.pdfeditormadtpeeps.Utility.Constants.pdfExtension;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +38,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -59,24 +62,38 @@ import com.example.pdfeditormadtpeeps.Utility.Constants;
 import com.example.pdfeditormadtpeeps.Utility.CreatePdf;
 import com.example.pdfeditormadtpeeps.Utility.DialogUtils;
 import com.example.pdfeditormadtpeeps.Utility.EqualSpacingItemDecoration;
+import com.example.pdfeditormadtpeeps.Utility.ExcelToPDFAsync;
 import com.example.pdfeditormadtpeeps.Utility.FileUtils;
 import com.example.pdfeditormadtpeeps.Utility.ImageToPDFOptions;
 import com.example.pdfeditormadtpeeps.Utility.ImageUtils;
 import com.example.pdfeditormadtpeeps.Utility.MergePdf;
 import com.example.pdfeditormadtpeeps.Utility.PageSizeUtils;
 import com.example.pdfeditormadtpeeps.Utility.PathUtil;
+import com.example.pdfeditormadtpeeps.Utility.PermissionsUtils;
+import com.example.pdfeditormadtpeeps.Utility.RealPathUtil;
 import com.example.pdfeditormadtpeeps.Utility.StringUtils;
 import com.example.pdfeditormadtpeeps.adapter.RecentFileadapter;
 import com.example.pdfeditormadtpeeps.database.DatabaseHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfImportedPage;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.zhihu.matisse.Matisse;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -96,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     ImageView iv_grid, iv_select, iv_name, iv_date;
     String list_type = "row";
     public int permission_flag = 0;
-    LinearLayoutCompat ll_select, ll_name, ll_date, ll_files, ll_new, ll_gallery;
+    private int mFontSize = 11;
+    LinearLayoutCompat ll_select, ll_name, ll_date, ll_files, ll_new, ll_gallery, ll_texttopdf, ll_exceltopdf;
     TextView tv_done, tv_select, tv_sort_by, tv_create;
     private boolean mIsButtonAlreadyClicked = false;
     private static final int REQUEST_PERMISSIONS_CODE = 124;
@@ -124,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     int first_time = 0;
     private RecyclerView mRecyclerView;
     private RecentFileadapter mAdapter;
-    public MainActivity mActivity;
     public String btn_select = "0", display_type="row", open_bottom_dg="";
     public static List<FileData> fileDataListSelected;
     LinearLayoutCompat ll_delete, ll_copy, ll_share, ll_merge;
@@ -134,7 +151,13 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     private MaterialDialog mMaterialDialog;
     LinearLayout design_bottom_sheet, llEmptyBox;
     FloatingActionButton fab;
-   
+    private static String mTextPath;
+    private Uri mExcelFileUri;
+    private String mRealPath;
+    private static final int INTENT_REQUEST_PICK_TEXT_FILE_CODE = 0;
+    private Font.FontFamily mFontFamily = Font.FontFamily.valueOf("TIMES_ROMAN");
+    private boolean mSettingsActivityOpenedForManageStoragePermission = false;
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +223,11 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         if (!checkPermission()) {
             requestPermission();
         } else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (!Environment.isExternalStorageManager()) {
+                    askStorageManagerPermission();
+                }
+            }
             getAllFiles();
 
         }
@@ -284,6 +312,26 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //                myViewModel.sendData(list_type);
             }
         });
+    }
+
+    private void askStorageManagerPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.one_more_thing_text)
+                        .setMessage(R.string.storage_manager_permission_rationale)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.allow_text, (dialog, which) -> {
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                            intent.setData(uri);
+                            mSettingsActivityOpenedForManageStoragePermission = true;
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }).setNegativeButton(R.string.close_app_text, ((dialog, which) -> finishAndRemoveTask()))
+                        .show();
+            }
+        }
     }
 
     private void openWhenSelectPdf() {
@@ -375,6 +423,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
             });
 
             ll_merge.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("RestrictedApi")
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onClick(View view) {
@@ -581,6 +630,8 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         ll_files = bottomSheetview.findViewById(R.id.ll_files);
         ll_gallery = bottomSheetview.findViewById(R.id.ll_gallery);
         ll_new = bottomSheetview.findViewById(R.id.ll_new);
+        ll_texttopdf = bottomSheetview.findViewById(R.id.ll_texttopdf);
+        ll_exceltopdf = bottomSheetview.findViewById(R.id.ll_exceltopdf);
 
         ll_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -619,6 +670,47 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
             }
         });
 
+        ll_texttopdf.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(Environment.getRootDirectory() + "/");
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setDataAndType(uri, "*/*");
+                String[] mimetypes = {"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        "application/msword", getString(R.string.text_type)};
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                try {
+                    startActivityForResult(
+                            Intent.createChooser(intent, String.valueOf(R.string.select_file)),
+                            INTENT_REQUEST_PICK_TEXT_FILE_CODE);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.install_file_manager);
+                }
+                dialog.dismiss();
+            }
+        });
+
+        ll_exceltopdf.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(Environment.getRootDirectory() + "/");
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setDataAndType(uri, "*/*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                try {
+                    startActivityForResult(
+                            Intent.createChooser(intent, String.valueOf(R.string.select_file)),
+                            2208);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.install_file_manager);
+                }
+                dialog.dismiss();
+            }
+        });
+
         dialog
                 .getWindow()
                 .findViewById(R.id.design_bottom_sheet)
@@ -634,18 +726,18 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void mergeFiles(final View view) {
         String[] pdfpaths = mFilePaths.toArray(new String[0]);
-        new MaterialDialog.Builder(mActivity)
+        new MaterialDialog.Builder(MainActivity.this)
                 .title(R.string.creating_pdf)
                 .content(R.string.enter_file_name)
                 .input(getString(R.string.example), null, (dialog, input) -> {
                     if (StringUtils.getInstance().isEmpty(input)) {
-                        StringUtils.getInstance().showSnackbar(mActivity, R.string.snackbar_name_not_blank);
+                        StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.snackbar_name_not_blank);
                     } else {
                         if (!mFileUtils.isFileExist(input + getString(R.string.pdf_ext))) {
                             new MergePdf(input.toString(), mHomePath, mPasswordProtected,
                                     mPassword, this, "PDF Editor").execute(pdfpaths);
                         } else {
-                            MaterialDialog.Builder builder = DialogUtils.getInstance().createOverwriteDialog(mActivity);
+                            MaterialDialog.Builder builder = DialogUtils.getInstance().createOverwriteDialog(MainActivity.this);
                             builder.onPositive((dialog12, which) -> new MergePdf(input.toString(),
                                     mHomePath, mPasswordProtected, mPassword,
                                     this, "PDF Editor").execute(pdfpaths))
@@ -663,7 +755,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
             StringUtils.getInstance().showSnackbar(this, R.string.snackbar_folder_not_created);
             return;
         }
-//        new DatabaseHelper(mActivity).insertRecord(path, mActivity.getString(R.string.created));
+//        new DatabaseHelper(MainActivity.this).insertRecord(path, MainActivity.this.getString(R.string.created));
         Toast.makeText(getApplicationContext(), "PDF Created!", Toast.LENGTH_LONG).show();
 //        StringUtils.getInstance().getSnackbarwithAction(this, R.string.snackbar_pdfCreated)
 //                .setAction(R.string.snackbar_viewAction,
@@ -692,6 +784,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         mPdfOptions.setPasswordProtected(false);
         mPdfOptions.setWatermarkAdded(false);
         mImagesUri.clear();
+        mExcelFileUri = null;
 //        showEnhancementOptions();
         ImageUtils.getInstance().mImageScaleType = mSharedPreferences.getString(Constants.DEFAULT_IMAGE_SCALE_TYPE_TEXT,
                 Constants.IMAGE_SCALE_TYPE_ASPECT_RATIO);
@@ -932,8 +1025,165 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //                }
                 break;
 
+            case INTENT_REQUEST_PICK_TEXT_FILE_CODE:
+                mTextPath = RealPathUtil.getInstance().getRealPath(this, data.getData());
+                Toast.makeText(getApplicationContext(), mTextPath, Toast.LENGTH_LONG).show();
+                if(mTextPath!=null) {
+                    if (!checkPermission()) {
+                        requestPermission();
+                    } else{
+                        openPdfNameDialog_();
+
+                    }
+                }
+                break;
+
+            case 2208:
+                mExcelFileUri = data.getData();
+                mRealPath = RealPathUtil.getInstance().getRealPath(this, mExcelFileUri);
+                processUri();
+                break;
+
+        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void processUri() {
+        String fileName = mFileUtils.getFileName(mExcelFileUri);
+        if (fileName != null && !fileName.endsWith(Constants.excelExtension) &&
+                !fileName.endsWith(Constants.excelWorkbookExtension)) {
+            StringUtils.getInstance().showSnackbar(this, R.string.extension_not_supported);
+            return;
+        }
+
+        openExcelToPdf_();
+        Log.d("EXCEL_FILE", fileName);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void openExcelToPdf_() {
+        new MaterialDialog.Builder(MainActivity.this)
+                .title(R.string.creating_pdf)
+                .content(R.string.enter_file_name)
+                .input(getString(R.string.example), null, (dialog, input) -> {
+                    if (StringUtils.getInstance().isEmpty(input)) {
+                        StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.snackbar_name_not_blank);
+                    } else {
+                        final String inputName = input.toString();
+                        if (!mFileUtils.isFileExist(inputName + getString(R.string.pdf_ext))) {
+                            convertToPdf(inputName);
+                        } else {
+                            MaterialDialog.Builder builder = DialogUtils.getInstance().createOverwriteDialog(MainActivity.this);
+                            builder.onPositive((dialog12, which) -> convertToPdf(inputName))
+                                    .onNegative((dialog1, which) -> openExcelToPdf_())
+                                    .show();
+                        }
+                    }
+                })
+                .show();
+    }
+
+    private void convertToPdf(String mFilename) {
+        String mStorePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/";
+        String mPath = mStorePath + mFilename + pdfExtension;
+        new ExcelToPDFAsync(mRealPath, mPath, MainActivity.this, mPasswordProtected, mPassword).execute();
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void openPdfNameDialog_() {
+        new MaterialDialog.Builder(MainActivity.this)
+                .title(R.string.creating_pdf)
+                .content(R.string.enter_file_name)
+                .input(getString(R.string.example), null, (dialog, input) -> {
+                    if (StringUtils.getInstance().isEmpty(input)) {
+                        StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.snackbar_name_not_blank);
+                    } else {
+                        final String inputName = input.toString();
+                        if (!mFileUtils.isFileExist(inputName + getString(R.string.pdf_ext))) {
+                            addText(inputName, mFontSize, mFontFamily);
+                        } else {
+                            MaterialDialog.Builder builder = DialogUtils.getInstance().createOverwriteDialog(MainActivity.this);
+                            builder.onPositive((dialog12, which) -> addText(inputName, mFontSize, mFontFamily))
+                                    .onNegative((dialog1, which) -> openPdfNameDialog_())
+                                    .show();
+                        }
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * This method is used to add append the text to an existing PDF file and
+     * make a final new pdf with the appended text to the old pdf content.
+     *
+     * @param fileName - the name of the new pdf that is to be created.
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void addText(String fileName, int fontSize, Font.FontFamily fontFamily) {
+        String mStorePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/";
+        String mPath = mStorePath + fileName + pdfExtension;
+        try {
+            StringBuilder text = new StringBuilder();
+            BufferedReader br = new BufferedReader(new FileReader(mTextPath));
+            String line;
+            Log.d("path_doc", mTextPath);
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                Log.d("line", line);
+                text.append('\n');
+            }
+            br.close();
+
+            OutputStream fos = new FileOutputStream(new File(mPath));
+
+//            PdfReader pdfReader = new PdfReader(mPath);
+
+            Document document = new Document(PageSize.A4);
+            PdfWriter pdfWriter = PdfWriter.getInstance(document, fos);
+            document.open();
+            PdfContentByte cb = pdfWriter.getDirectContent();
+//            for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
+//                PdfImportedPage page = pdfWriter.getImportedPage(pdfReader, i);
+//
+//                document.newPage();
+//                cb.addTemplate(page, 0, 0);
+//            }
+            document.setPageSize(PageSize.A4);
+            document.newPage();
+            document.add(new Paragraph(new Paragraph(text.toString(),
+                    FontFactory.getFont(fontFamily.name(), fontSize))));
+            document.close();
+
+            FileData fileData = new FileData();
+            fileData.setName(fileName+pdfExtension);
+            fileData.setDuration(formatLastModifiedDate(new File(mPath).lastModified()));
+            fileData.setFile_type("f");
+            fileData.setFile_path(new File(mPath));
+            fileDataArrayList.add(fileData);
+//            setSeectionPagerAdapter();
+            Intent intent = new Intent(MainActivity.this, OpenPdfActivity.class);
+            intent.putExtra("pdf_name", mPath);
+            startActivity(intent);
+
+
+            sortListByDateName(sort_type);
+            setList();
+
+//            StringUtils.getInstance().getSnackbarwithAction(MainActivity.this, R.string.snackbar_pdfCreated)
+//                    .setAction(R.string.snackbar_viewAction,
+//                            v -> mFileUtils.openFile(mPath, FileUtils.FileType.e_PDF))
+//                    .show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Toast.makeText(getApplicationContext(), "New PDF Created", Toast.LENGTH_LONG).show();
         }
     }
+
+
+
 
     public void copy(File src, File dst) throws IOException {
         try (InputStream in = new FileInputStream(src)) {
@@ -1217,14 +1467,14 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
     @Override
     public void resetValues(boolean isPDFMerged, String path) {
         if (isPDFMerged) {
-//            StringUtils.getInstance().getSnackbarwithAction(mActivity, R.string.pdf_merged)
+//            StringUtils.getInstance().getSnackbarwithAction(MainActivity.this, R.string.pdf_merged)
 //                    .setAction(R.string.snackbar_viewAction,
 //                            v -> mFileUtils.openFile(path, FileUtils.FileType.e_PDF)).show();
-            StringUtils.getInstance().showSnackbar(mActivity, R.string.pdf_merged);
+            StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.pdf_merged);
             finish();
             startActivity(getIntent());
         } else
-            StringUtils.getInstance().showSnackbar(mActivity, R.string.file_access_error);
+            StringUtils.getInstance().showSnackbar(MainActivity.this, R.string.file_access_error);
 
         mFilePaths.clear();
         mPasswordProtected = false;

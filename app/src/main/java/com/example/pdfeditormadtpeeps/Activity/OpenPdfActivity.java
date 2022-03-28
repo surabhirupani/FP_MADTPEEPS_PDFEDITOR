@@ -121,6 +121,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
     private FileUtils mFileUtils;
     private String mPath;
     String timeStamp;
+    private PrintManager printManager;
     private static final int INTENT_REQUEST_REARRANGE_PDF = 11;
 
     private boolean mPermissionGranted = false;
@@ -194,6 +195,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
         tv_done = findViewById(R.id.tv_done);
         viewPager = findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(0);
+        printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
 
         mDatabaseHelper = new DatabaseHelper(this);
         mFileUtils = new FileUtils(this);
@@ -604,6 +606,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             }
         });
         btn_draw.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 im_Eraser.setVisibility(View.VISIBLE);
@@ -616,6 +619,8 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
                 btn_highlight.setBackgroundResource(R.drawable.button_bg);
                 btn_draw.setBackgroundResource(R.drawable.group_16981);
                 btn_text.setBackgroundResource(R.drawable.button_bg);
+                btn_draw.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#226A63")));
+                btn_text.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3C444E")));
                 ll_color.setVisibility(View.VISIBLE);
                 ll_mode.setVisibility(View.GONE);
                 ll_opacity.setVisibility(View.VISIBLE);
@@ -630,11 +635,14 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             }
         });
         btn_text.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 btnSelected = "Text";
 
                // Toast.makeText(getApplicationContext(),btnSelected,Toast.LENGTH_LONG).show();
+                btn_text.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#226A63")));
+                btn_draw.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3C444E")));
                 btn_highlight.setBackgroundResource(R.drawable.button_bg);
                 btn_draw.setBackgroundResource(R.drawable.button_bg);
                 btn_text.setBackgroundResource(R.drawable.group_16981);
@@ -1703,7 +1711,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-                final PrintDocumentAdapter mPrintDocumentAdapter = new PrintDocumentAdapterHelper(file_path);
+                final PrintDocumentAdapter mPrintDocumentAdapter = new PrintDocumentAdapterHelper(OpenPdfActivity.this, file_path.getName(),file_path.getPath());
 
                 PrintManager printManager = (PrintManager) OpenPdfActivity.this
                         .getSystemService(Context.PRINT_SERVICE);
@@ -1803,7 +1811,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-                final PrintDocumentAdapter mPrintDocumentAdapter = new PrintDocumentAdapterHelper(file_path);
+                final PrintDocumentAdapter mPrintDocumentAdapter = new PrintDocumentAdapterHelper(OpenPdfActivity.this, file_path.getName(),file_path.getPath());
 
                 PrintManager printManager = (PrintManager) OpenPdfActivity.this
                         .getSystemService(Context.PRINT_SERVICE);

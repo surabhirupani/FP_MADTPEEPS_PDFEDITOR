@@ -58,9 +58,9 @@ public class RealPathUtil {
 
                 if ("primary".equalsIgnoreCase(type)) {
                     if (split.length > 1) {
-                        path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + split[1];
+                        path = Environment.getExternalStorageDirectory() + "/" + split[1];
                     } else {
-                        path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+                        path = Environment.getExternalStorageDirectory() + "/";
                     }
                 } else {
                     path = "storage" + "/" + docId.replace(":", "/");
@@ -90,10 +90,10 @@ public class RealPathUtil {
 
         if (fileName != null) {
             if (subFolderName != null)
-                return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() +
+                return Environment.getExternalStorageDirectory() +
                         "/Download/" + subFolderName + fileName;
             else
-                return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() +
+                return Environment.getExternalStorageDirectory() +
                         "/Download/" + fileName;
         }
         final String id = DocumentsContract.getDocumentId(uri);

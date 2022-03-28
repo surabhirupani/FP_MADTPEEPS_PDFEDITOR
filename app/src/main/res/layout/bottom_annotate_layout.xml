@@ -67,6 +67,7 @@
             android:layout_weight="1"
             android:paddingBottom="5dp"
             android:layout_marginLeft="12dp"
+            android:visibility="gone"
             android:id="@+id/btn_highlight"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -525,7 +526,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/ll_alignment"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="15dp">
 
         <androidx.appcompat.widget.AppCompatTextView

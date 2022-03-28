@@ -36,7 +36,31 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New PDF File"
+            android:text="New Blank PDF File"
+            android:layout_weight="1"
+            android:textColor="#A6FFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="15sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_exceltopdf"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_page1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Convert Excel to PDF"
             android:layout_weight="1"
             android:textColor="#A6FFFFFF"
             android:layout_marginLeft="10dp"
@@ -73,7 +97,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:id="@+id/ll_files"
         android:orientation="horizontal">
 
@@ -86,6 +109,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Import From Files"
+            android:layout_weight="1"
+            android:textColor="#A6FFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="15sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_texttopdf"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_page1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Convert Text to PDF"
             android:layout_weight="1"
             android:textColor="#A6FFFFFF"
             android:layout_marginLeft="10dp"
