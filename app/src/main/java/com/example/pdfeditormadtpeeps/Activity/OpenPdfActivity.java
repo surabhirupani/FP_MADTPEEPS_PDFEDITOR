@@ -454,6 +454,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void openAnnotateDialog() {
         edit_imag_flag = 1;
         annotate_flag = 1;
@@ -512,6 +513,9 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             tv_brush.setText(progress_brush+"%");
             sb_opacity.setProgress(progress_opacity);
             tv_opacity.setText(progress_opacity+"%");
+            btn_draw.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#226A63")));
+            btn_text.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3C444E")));
+
             btn_highlight.setBackgroundResource(R.drawable.button_bg);
             btn_draw.setBackgroundResource(R.drawable.group_16981);
             btn_text.setBackgroundResource(R.drawable.button_bg);
@@ -531,6 +535,9 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
             btn_highlight.setBackgroundResource(R.drawable.button_bg);
             btn_draw.setBackgroundResource(R.drawable.button_bg);
             btn_text.setBackgroundResource(R.drawable.group_16981);
+            btn_text.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#226A63")));
+            btn_draw.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3C444E")));
+
             ll_color.setVisibility(View.GONE);
             ll_mode.setVisibility(View.GONE);
             ll_opacity.setVisibility(View.GONE);
