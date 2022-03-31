@@ -216,5 +216,32 @@
             android:textSize="14sp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:id="@+id/ll_pwd"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/button_bg"
+                android:layout_gravity="center"
+                android:id="@+id/ib_pwd"
+                app:srcCompat="@drawable/ic_baseline_lock_24"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>
