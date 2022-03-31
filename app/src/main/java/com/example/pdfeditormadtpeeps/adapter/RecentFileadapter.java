@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -146,6 +147,8 @@ public class RecentFileadapter extends
                 ImageButton ll_print = dialog.findViewById(R.id.ll_print);
                 ImageButton ll_duplicate = dialog.findViewById(R.id.ll_duplicate);
                 ImageButton ll_delete = dialog.findViewById(R.id.ll_delete);
+                LinearLayoutCompat ll_pwd = dialog.findViewById(R.id.ll_pwd);
+                ImageButton ib_pwd = dialog.findViewById(R.id.ib_pwd);
                 TextView tv_edit = dialog.findViewById(R.id.tv_edit);
                 TextView tv_print = dialog.findViewById(R.id.tv_print);
                 dialog.getWindow()
@@ -157,9 +160,10 @@ public class RecentFileadapter extends
                     iv_type.setImageResource(R.drawable.group_16874);
                     tv_edit.setText("Zip");
                     tv_print.setText("Mail");
-
+                    ll_pwd.setVisibility(View.GONE);
                 } else {
                     iv_type.setImageResource(R.drawable.pdf);
+                    ll_pwd.setVisibility(View.VISIBLE);
                 }
 
                 try {
@@ -173,6 +177,13 @@ public class RecentFileadapter extends
                     e.printStackTrace();
                     tv_page_size.setText(FileInfoUtils.getFormattedSize(fileDataList.get(pos).getFile_path()));
                 }
+
+                ll_pwd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
 
 
                 ll_edit.setOnClickListener(new View.OnClickListener() {
@@ -244,9 +255,9 @@ public class RecentFileadapter extends
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            ((MainActivity)context).refreshPage();
                         }
                         notifyDataSetChanged();
+                        ((MainActivity)context).refreshPage();
                     }
                 });
 
