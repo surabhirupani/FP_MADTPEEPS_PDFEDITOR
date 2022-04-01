@@ -259,8 +259,13 @@ public class FolderActivity extends AppCompatActivity implements MergeFilesListe
                                             }
 
                                             d.dismiss();
+                                            tv_done.setVisibility(View.GONE);
+                                            tv_select.setVisibility(View.VISIBLE);
+                                            fab.setVisibility(View.VISIBLE);
+                                            btn_select = "0";
                                             design_bottom_sheet.setVisibility(View.GONE);
-                                            mAdapter.notifyDataSetChanged();
+                                            setListInRecycleView();
+//                                            mAdapter.notifyDataSetChanged();
                                         }
                                     })
                                     .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -306,6 +311,10 @@ public class FolderActivity extends AppCompatActivity implements MergeFilesListe
                         @Override
                         public void onClick(View view) {
                             mergeFiles(view);
+                            tv_done.setVisibility(View.GONE);
+                            fab.setVisibility(View.VISIBLE);
+                            btn_select = "0";
+                            tv_select.setVisibility(View.VISIBLE);
                             design_bottom_sheet.setVisibility(View.GONE);
                         }
                     });
@@ -758,7 +767,7 @@ public class FolderActivity extends AppCompatActivity implements MergeFilesListe
             fileData.setFile_type("f");
             fileData.setFile_path(file);
             fileDataArrayList.add(fileData);
-            mAdapter.notifyDataSetChanged();
+            setListInRecycleView();
             mExcelFileUri = null;
             mDatabaseHelper.deleteRecord(file.getName());
             mDatabaseHelper.insertRecord(String.valueOf(path),
