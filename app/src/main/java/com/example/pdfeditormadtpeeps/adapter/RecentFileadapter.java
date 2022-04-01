@@ -145,6 +145,7 @@ public class RecentFileadapter extends
                 dialog.setContentView(bottomSheetview);
                 TextView tv_name = dialog.findViewById(R.id.tv_name);
                 TextView tv_date = dialog.findViewById(R.id.tv_date);
+                TextView tv_pwd = dialog.findViewById(R.id.tv_pwd);
                 TextView tv_page_size = dialog.findViewById(R.id.tv_page_size);
                 ImageView iv_type = dialog.findViewById(R.id.iv_type);
                 ImageButton ll_share = dialog.findViewById(R.id.ll_share);
