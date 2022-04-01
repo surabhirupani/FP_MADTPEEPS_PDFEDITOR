@@ -58,7 +58,7 @@ public class PdfToImages extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         if (mPassword != null) {
-//            mDecryptedPath = mPDFEncryptionUtility.removeDefPasswordForImages(mPath, mPassword);
+            mDecryptedPath = mPDFEncryptionUtility.removeDefPasswordForImages(mPath, mPassword);
         }
         mOutputFilePaths = new ArrayList<>();
         mImagesCount = 0;

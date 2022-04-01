@@ -39,7 +39,10 @@ import com.example.pdfeditormadtpeeps.Interface.OnSelectionListner;
 import com.example.pdfeditormadtpeeps.Model.FileData;
 import com.example.pdfeditormadtpeeps.R;
 import com.example.pdfeditormadtpeeps.Utility.FileInfoUtils;
+import com.example.pdfeditormadtpeeps.Utility.PDFEncryptionUtility;
+import com.example.pdfeditormadtpeeps.Utility.PDFUtils;
 import com.example.pdfeditormadtpeeps.Utility.PrintDocumentAdapterHelper;
+import com.example.pdfeditormadtpeeps.Utility.StringUtils;
 import com.example.pdfeditormadtpeeps.Utility.ZipManager;
 import com.example.pdfeditormadtpeeps.database.DatabaseHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -65,6 +68,7 @@ import java.util.zip.ZipOutputStream;
 public class RecentFileadapter extends
         RecyclerView.Adapter<RecentFileadapter.ViewHolder> {
 
+    private final PDFUtils mPDFUtils;
     public List<FileData> fileDataList;
     String display_type = "row";
     String btn_select="0";
@@ -84,6 +88,7 @@ public class RecentFileadapter extends
         this.arrayList.addAll(fileDataList);
         mSelectedFiles = new ArrayList<>();
         mDatabaseHelper = new DatabaseHelper(context);
+        mPDFUtils = new PDFUtils(context);
     }
 
     // Create new views
@@ -131,6 +136,7 @@ public class RecentFileadapter extends
         }
 
         viewHolder.iv_more.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
                 View bottomSheetview = context.getLayoutInflater().inflate(R.layout.bottom_more_layout, null);
@@ -165,6 +171,14 @@ public class RecentFileadapter extends
                     iv_type.setImageResource(R.drawable.pdf);
                     ll_pwd.setVisibility(View.VISIBLE);
                 }
+                PDFEncryptionUtility pdfEncryptionUtility = new PDFEncryptionUtility(context);
+
+                String mPath = fileDataList.get(pos).getFile_path().toString();
+                if (!mPDFUtils.isPDFEncrypted(mPath)) {
+                    ib_pwd.setImageResource(R.drawable.ic_baseline_lock_24);
+                } else {
+                    ib_pwd.setImageResource(R.drawable.ic_baseline_lock_open_24);
+                }
 
                 try {
                     ParcelFileDescriptor parcelFileDescriptor = ParcelFileDescriptor.open(fileDataList.get(pos).getFile_path(), ParcelFileDescriptor.MODE_READ_ONLY);
@@ -173,15 +187,20 @@ public class RecentFileadapter extends
                         pdfRenderer = new PdfRenderer(parcelFileDescriptor);
                         tv_page_size.setText(pdfRenderer.getPageCount()+" Page | "+ FileInfoUtils.getFormattedSize(fileDataList.get(pos).getFile_path()));
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     tv_page_size.setText(FileInfoUtils.getFormattedSize(fileDataList.get(pos).getFile_path()));
                 }
 
-                ll_pwd.setOnClickListener(new View.OnClickListener() {
+                ib_pwd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        if (!mPDFUtils.isPDFEncrypted(mPath)) {
+                            pdfEncryptionUtility.setPassword(mPath, null);
+                        } else {
+                            pdfEncryptionUtility.removePassword(mPath, null);
+                        }
+                        notifyDataSetChanged();
                     }
                 });
 

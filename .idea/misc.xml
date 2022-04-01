@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/bottom_selection_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_share_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/bottom_sortby_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_font.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/dlog_create_folder_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dlog_rename_layout.xml" value="0.1" />

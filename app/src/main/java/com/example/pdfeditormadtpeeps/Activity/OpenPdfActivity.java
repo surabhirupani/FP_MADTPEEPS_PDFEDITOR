@@ -1,5 +1,8 @@
 package com.example.pdfeditormadtpeeps.Activity;
 
+import static com.example.pdfeditormadtpeeps.Utility.Constants.MASTER_PWD_STRING;
+import static com.example.pdfeditormadtpeeps.Utility.Constants.appName;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -18,6 +21,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,6 +53,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.pdfeditormadtpeeps.Interface.ExtractImagesListener;
 import com.example.pdfeditormadtpeeps.Interface.OnPDFCreatedInterface;
 import com.example.pdfeditormadtpeeps.Interface.OnPdfReorderedInterface;
@@ -170,6 +175,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
     private int pageNumber=0;
     private int progress_opacity = 100;
 
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -224,25 +230,63 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
         mPath = file_path.getPath();
         tv_file_name.setText(file_path.getName());
         pdfView.setBackgroundColor(Color.LTGRAY);
-        pdfView.fromFile(file_path)
-                .defaultPage(0)
-                .onPageChange(this)
-                .enableAnnotationRendering(true)
-                .onTap(new OnTapListener() {
-                    @Override
-                    public boolean onTap(MotionEvent e) {
-                        return false;
-                    }
-                })
-                .onDraw(new OnDrawListener() {
-                    @Override
-                    public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
+        if (mPDFUtils.isPDFEncrypted(mPath)) {
+            mInputPassword = new String[1];
+            new MaterialDialog.Builder(this)
+                    .title(R.string.enter_password)
+                    .content(R.string.decrypt_protected_file)
+                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                    .input(null, null, (dialog, input) -> {
+                        if (StringUtils.getInstance().isEmpty(input)) {
+                            StringUtils.getInstance().showSnackbar(this, R.string.snackbar_name_not_blank);
+                        } else {
+                            final String inputName = input.toString();
+                            mInputPassword[0] = inputName;
+                            pdfView.fromFile(file_path)
+                                    .defaultPage(0)
+                                    .onPageChange(this)
+                                    .password(mInputPassword[0])
+                                    .enableAnnotationRendering(true)
+                                    .onTap(new OnTapListener() {
+                                        @Override
+                                        public boolean onTap(MotionEvent e) {
+                                            return false;
+                                        }
+                                    })
+                                    .onDraw(new OnDrawListener() {
+                                        @Override
+                                        public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
 //                        Toast.makeText(OpenPdfActivity.this, displayedPage+"", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .scrollHandle(new DefaultScrollHandle(this))
-                .spacing(10) // in dp
-                .load();
+                                        }
+                                    })
+                                    .scrollHandle(new DefaultScrollHandle(this))
+                                    .spacing(10) // in dp
+                                    .load();
+                        }
+                    })
+                    .show();
+        } else {
+            pdfView.fromFile(file_path)
+                    .defaultPage(0)
+                    .onPageChange(this)
+                    .enableAnnotationRendering(true)
+                    .onTap(new OnTapListener() {
+                        @Override
+                        public boolean onTap(MotionEvent e) {
+                            return false;
+                        }
+                    })
+                    .onDraw(new OnDrawListener() {
+                        @Override
+                        public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
+//                        Toast.makeText(OpenPdfActivity.this, displayedPage+"", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .scrollHandle(new DefaultScrollHandle(this))
+                    .spacing(10) // in dp
+                    .load();
+        }
+
 
 
         resetValuesf();
@@ -439,7 +483,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
                     Constants.DEFAULT_PAGE_SIZE));
             mPdfOptions.setImageScaleType(ImageUtils.getInstance().mImageScaleType);
             mPdfOptions.setPageNumStyle(mPageNumStyle);
-//        mPdfOptions.setMasterPwd(mSharedPreferences.getString(MASTER_PWD_STRING, appName));
+            mPdfOptions.setMasterPwd(mSharedPreferences.getString(MASTER_PWD_STRING, appName));
             mPdfOptions.setPageColor(mPageColor);
             String file_name = tv_file_name.getText().toString();
             file_name = file_name.substring(0, file_name.length() - 4);

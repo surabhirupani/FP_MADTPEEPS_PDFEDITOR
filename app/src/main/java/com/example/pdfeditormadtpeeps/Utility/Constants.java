@@ -12,6 +12,7 @@ public class Constants {
     public static final String DEFAULT_COMPRESSION = "DefaultCompression";
     public static final String SORTING_INDEX = "SORTING_INDEX";
     public static int copy_flag = 0;
+    public static final String appName = "PDF Editor";
     public static List<FileData> fileDataListSelected = new ArrayList<>();
     public static final String IMAGE_EDITOR_KEY = "first";
     public static final String DEFAULT_FONT_SIZE_TEXT = "DefaultFontSize";
