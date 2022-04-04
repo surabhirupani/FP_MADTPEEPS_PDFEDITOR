@@ -230,7 +230,7 @@ public class OpenPdfActivity extends AppCompatActivity implements OnPdfReordered
         mPath = file_path.getPath();
         tv_file_name.setText(file_path.getName());
         pdfView.setBackgroundColor(Color.LTGRAY);
-        if (mPDFUtils.isPDFEncrypted(mPath)) {
+        if (mPath.contains("encrypted.pdf")) {
             mInputPassword = new String[1];
             new MaterialDialog.Builder(this)
                     .title(R.string.enter_password)

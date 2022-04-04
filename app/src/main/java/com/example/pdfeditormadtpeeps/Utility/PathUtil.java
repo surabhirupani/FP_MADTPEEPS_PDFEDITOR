@@ -91,10 +91,10 @@ public class PathUtil {
         if (fileName != null) {
             if (subFolderName != null)
                 return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() +
-                        "/Download/" + subFolderName + fileName;
+                        subFolderName + fileName;
             else
                 return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() +
-                        "/Download/" + fileName;
+                          fileName;
         }
         final String id = DocumentsContract.getDocumentId(uri);
 

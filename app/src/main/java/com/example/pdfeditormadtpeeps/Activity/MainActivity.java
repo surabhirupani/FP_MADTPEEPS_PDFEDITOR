@@ -223,13 +223,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         if (!checkPermission()) {
             requestPermission();
         } else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                if (!Environment.isExternalStorageManager()) {
-                    askStorageManagerPermission();
-                }
-            }
             getAllFiles();
-
         }
 
         et_search.addTextChangedListener(new TextWatcher() {
@@ -314,25 +308,7 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
         });
     }
 
-    private void askStorageManagerPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.one_more_thing_text)
-                        .setMessage(R.string.storage_manager_permission_rationale)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.allow_text, (dialog, which) -> {
-                            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                            Uri uri = Uri.fromParts("package", getPackageName(), null);
-                            intent.setData(uri);
-                            mSettingsActivityOpenedForManageStoragePermission = true;
-                            startActivity(intent);
-                            dialog.dismiss();
-                        }).setNegativeButton(R.string.close_app_text, ((dialog, which) -> finishAndRemoveTask()))
-                        .show();
-            }
-        }
-    }
+
 
     private void openWhenSelectPdf() {
         btn_select = "1";
@@ -945,29 +921,28 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //                    } else if (uriString.startsWith("file://")) {
 //                        displayName = myFile.getName();
 //                    }
-                    try {
-                        String path = PathUtil.getPath(this, uri);
-                        Log.d("PDF", path);
+                    String path = RealPathUtil.getInstance().getRealPath(this, uri);
+                    Log.d("PDF", path);
 
-                        String file_name = new File(path).getName();
-                        File dest_file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/" + file_name);
-                        try {
-                            copy(new File(path), dest_file);
-                            mDatabaseHelper.deleteRecord(file_name);
-                            mDatabaseHelper.insertRecord(dest_file.getPath(),
-                                    formatLastModifiedDate(dest_file.lastModified()), "f", file_name);
-                            FileData fileData = new FileData();
-                            fileData.setName(file_name);
-                            fileData.setDuration(formatLastModifiedDate(dest_file.lastModified()));
-                            fileData.setFile_type("f");
-                            fileData.setFile_path(dest_file);
-                            fileDataArrayList.add(fileData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Intent intent = new Intent(this, OpenPdfActivity.class);
-                        intent.putExtra("pdf_name", dest_file.getPath());
-                        startActivity(intent);
+                    String file_name = new File(path).getName();
+                    File dest_file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/mypdf/" + file_name);
+                    try {
+                        copy(new File(path), dest_file);
+                        mDatabaseHelper.deleteRecord(file_name);
+                        mDatabaseHelper.insertRecord(dest_file.getPath(),
+                                formatLastModifiedDate(dest_file.lastModified()), "f", file_name);
+                        FileData fileData = new FileData();
+                        fileData.setName(file_name);
+                        fileData.setDuration(formatLastModifiedDate(dest_file.lastModified()));
+                        fileData.setFile_type("f");
+                        fileData.setFile_path(dest_file);
+                        fileDataArrayList.add(fileData);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(this, OpenPdfActivity.class);
+                    intent.putExtra("pdf_name", dest_file.getPath());
+                    startActivity(intent);
 
 
 //                        mImagesUri.clear();
@@ -986,10 +961,6 @@ public class MainActivity extends AppCompatActivity implements OnPDFCreatedInter
 //
 ////                    mFileUtils.openSaveDialog(preFillName, ext, filename -> save(isGrayScale, filename));
 //                        }
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-
 
 
                 } else {
